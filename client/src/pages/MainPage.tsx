@@ -1,14 +1,18 @@
 import Navbar from "../components/Navbar/Navbar";
 import Header from "../components/Header/Header";
 import SongTable from "../components/SongTable/SongTable";
+import { useState } from "react";
 
 
 const MainPage = () => {
+const [seed, setSeed] = useState(123)
+
+
   return (
     <>
       <Header />
-      <Navbar />
-      <SongTable></SongTable>
+      <Navbar seed = {seed} setSeed = {setSeed}/>
+      <SongTable seed = {seed}></SongTable>
     </>
   );
 };

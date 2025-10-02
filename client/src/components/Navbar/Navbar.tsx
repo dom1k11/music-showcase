@@ -1,17 +1,14 @@
-
 import NavbarSelect from "./NavbarSelect";
 import RangeInput from "./RangeInput";
 import SeedInput from "./SeedInput";
-import './Navbar.css'
+import "./Navbar.css";
 
-
-
-const Navbar = () => {
+const Navbar = ({ seed, setSeed }) => {
   return (
     <nav>
       <div className="navbar-group">
         <NavbarSelect />
-        <SeedInput />
+        <SeedInput seed={seed} setSeed={setSeed} />
         <RangeInput />
       </div>
     </nav>

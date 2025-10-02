@@ -13,13 +13,14 @@ type Song = {
   coverUrl: string;
 };
 
-const SongTable = () => {
+const SongTable = ({seed}) => {
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    generate(456, 10)
+    setLoading(true);
+    generate(seed, 10)
       .then((data: Song[]) => {
         setSongs(data);
         setLoading(false);
@@ -28,7 +29,7 @@ const SongTable = () => {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [seed]);
 
   if (loading) return <p>Loading songs...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
