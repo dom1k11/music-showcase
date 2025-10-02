@@ -1,0 +1,40 @@
+.song-details {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.song-details-left {
+  flex: 0 0 150px;
+}
+
+.song-cover {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.song-details-right {
+  flex: 1;
+}
+
+.song-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem; 
+}
+
+.song-title-row h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  flex: 0 0 auto;
+}
+
+.song-title-row audio {
+  flex: 0 0 auto;
+  height: 36px;
+}
+.expanded { background-color: #e6f0ff; }
+

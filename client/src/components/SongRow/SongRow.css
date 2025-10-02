@@ -1,0 +1,18 @@
+.song-row:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.song-row.expanded {
+  background-color: #e6f0ff;
+}
+
+.song-row-expanded td {
+  padding: 0.8rem;
+  background: #f9f9f9;
+}
+
+.song-row-details {
+  font-size: 0.9rem;
+  color: #333;
+}
