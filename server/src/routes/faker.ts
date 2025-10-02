@@ -3,6 +3,6 @@ import { handleGenerateData } from '../controllers/fakerController';
 
 const router = Router();
 
-router.get('/generate', handleGenerateData);
+router.post('/generate', handleGenerateData);
 
 export default router;

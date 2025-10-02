@@ -1,33 +1,36 @@
+import { useEffect, useState } from "react";
 import SongRow from "../SongRow/SongRow";
+import { generate } from "../../services/songDataGenerator";
 import "./SongTable.css";
 
+type Song = {
+  id: number;
+  title: string;
+  artist: string;
+  album: string;
+  genre: string;
+  details: string;
+};
+
 const SongTable = () => {
-  const songs = [
-    {
-      id: 41,
-      title: "All Elfs Go",
-      artist: "Elton Smith, MD",
-      album: "Oh, My God",
-      genre: "House",
-      details: "Extra info about this song...",
-    },
-    {
-      id: 42,
-      title: "Right On",
-      artist: "Ella Fiz And Cockroaches",
-      album: "Single",
-      genre: "Folk",
-      details: "Lyrics, release date, etc.",
-    },
-    {
-      id: 43,
-      title: "Whisper!",
-      artist: "Albert Norton Stone",
-      album: "Single",
-      genre: "Heavy Metal",
-      details: "This is a heavy track.",
-    },
-  ];
+  const [songs, setSongs] = useState<Song[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    generate(123, 10)
+      .then((data: Song[]) => {
+        setSongs(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p>Loading songs...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
     <div className="song-table-container">
