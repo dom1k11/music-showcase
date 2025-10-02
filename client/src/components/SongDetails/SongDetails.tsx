@@ -1,33 +1,26 @@
-import cover from "../../assets/cover.png";
+import SongCover from "./SongCover";
 import sound from "../../assets/sound.mp3";
-
 import "./SongDetails.css";
-type SongDetailsProps = {
-  song: {
-    id: number;
-    title: string;
-    artist: string;
-    album: string;
-    genre: string;
-    details: string;
-  };
-};
 
-export default function SongDetails({ song }: SongDetailsProps) {
+export default function SongDetails({ song }: { song: any }) {
   return (
     <div className="song-details">
       <div className="song-details-left">
-        <img src={cover} alt={`${song.album} cover`} className="song-cover" />
+        <SongCover
+          title={song.title}
+          artist={song.artist}
+          coverUrl={song.coverUrl}
+          size={175}
+        />
       </div>
+
       <div className="song-details-right">
         <div className="song-title-row">
           <h1>{song.title}</h1>
           <audio controls>
             <source src={sound} type="audio/mpeg" />
-            Your browser does not support the audio element.
           </audio>
         </div>
-
         <p>
           from <b>{song.album}</b> by <b>{song.artist}</b>
         </p>
@@ -35,10 +28,7 @@ export default function SongDetails({ song }: SongDetailsProps) {
         <p>
           <i>Lyrics</i>
         </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua
-        </p>
+        <p>{song.details}</p>
       </div>
     </div>
   );

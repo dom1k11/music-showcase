@@ -10,6 +10,7 @@ type Song = {
   album: string;
   genre: string;
   details: string;
+  coverUrl: string;
 };
 
 const SongTable = () => {
@@ -18,7 +19,7 @@ const SongTable = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    generate(123, 10)
+    generate(456, 10)
       .then((data: Song[]) => {
         setSongs(data);
         setLoading(false);

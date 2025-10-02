@@ -8,6 +8,7 @@ type Song = {
   album: string;
   genre: string;
   details: string;
+  coverUrl: string;
 };
 
 const SongRow = ({ song }: { song: Song }) => {
