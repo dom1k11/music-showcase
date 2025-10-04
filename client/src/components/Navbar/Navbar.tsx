@@ -3,11 +3,11 @@ import RangeInput from "./RangeInput";
 import SeedInput from "./SeedInput";
 import "./Navbar.css";
 
-const Navbar = ({ seed, setSeed, avgLikes, setAvgLikes }) => {
+const Navbar = ({ seed, setSeed, avgLikes, setAvgLikes, lang, setLang }) => {
   return (
     <nav>
       <div className="navbar-group">
-        <NavbarSelect />
+        <NavbarSelect lang={lang} setLang={setLang} />
         <SeedInput seed={seed} setSeed={setSeed} />
         <RangeInput avgLikes={avgLikes} setAvgLikes={setAvgLikes} />
       </div>

@@ -6,6 +6,7 @@ import { useState } from "react";
 const MainPage = () => {
   const [seed, setSeed] = useState(123);
   const [avgLikes, setAvgLikes] = useState(5);
+  const [lang, setLang] = useState("en-US");
 
   return (
     <>
@@ -15,8 +16,10 @@ const MainPage = () => {
         setSeed={setSeed}
         avgLikes={avgLikes}
         setAvgLikes={setAvgLikes}
+        lang={lang}
+        setLang={setLang}
       />
-      <SongTable seed={seed} avgLikes={avgLikes} />
+      <SongTable seed={seed} avgLikes={avgLikes} lang={lang} />{" "}
     </>
   );
 };

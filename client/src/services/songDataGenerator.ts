@@ -1,10 +1,10 @@
 import { API_URL } from "../constants/api_url";
 
-export async function generate(seed: number, count: number) {
+export async function generate(seed: number, count: number, lang: string) {
   const res = await fetch(`${API_URL}/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ seed, count }),
+    body: JSON.stringify({ seed, count, lang }),
   });
 
   if (!res.ok) {
