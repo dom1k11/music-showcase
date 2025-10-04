@@ -4,7 +4,7 @@ import SeedInput from "./SeedInput";
 import "./Navbar.css";
 
 const Navbar = ({ seed, setSeed }) => {
-  return (
+  return (  
     <nav>
       <div className="navbar-group">
         <NavbarSelect />
