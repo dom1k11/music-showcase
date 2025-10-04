@@ -16,6 +16,9 @@ const SongTable = ({ seed, avgLikes, lang }: SongTableProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
+  useEffect(() => {
+    setPage(1);
+  }, [seed, lang]);
 
   useEffect(() => {
     setLoading(true);
