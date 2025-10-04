@@ -11,7 +11,7 @@ type Song = {
   coverUrl: string;
 };
 
-const SongRow = ({ song }: { song: Song }) => {
+const SongRow = ({ song, seed }: { song: Song; seed: number }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -33,7 +33,7 @@ const SongRow = ({ song }: { song: Song }) => {
         <tr className="song-row-expanded">
           <td colSpan={5}>
             <div className="song-row-details">
-              <SongDetails song={song} />
+              <SongDetails song={song} seed={seed} />
             </div>
           </td>
         </tr>

@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@magenta/music": "^1.23.1",
+    "@tonejs/midi": "^2.0.28",
+    "audiobuffer-to-wav": "^1.0.0",
     "bootstrap": "^5.3.8",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "tone": "^15.1.22"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

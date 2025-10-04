@@ -13,7 +13,7 @@ type Song = {
   coverUrl: string;
 };
 
-const SongTable = ({seed}) => {
+const SongTable = ({ seed }) => {
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,7 +48,7 @@ const SongTable = ({seed}) => {
         </thead>
         <tbody>
           {songs.map((song) => (
-            <SongRow key={song.id} song={song} />
+            <SongRow key={song.id} song={song} seed={seed} />
           ))}
         </tbody>
       </table>
