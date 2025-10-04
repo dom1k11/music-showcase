@@ -6,6 +6,10 @@
 
 .song-details-left {
   flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .song-cover {
@@ -16,6 +20,13 @@
   border: 1px solid #ccc;
 }
 
+.song-likes {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
 .song-details-right {
   flex: 1;
 }
@@ -23,7 +34,7 @@
 .song-title-row {
   display: flex;
   align-items: center;
-  gap: 1rem; 
+  gap: 1rem;
 }
 
 .song-title-row h1 {
@@ -36,5 +47,7 @@
   flex: 0 0 auto;
   height: 36px;
 }
-.expanded { background-color: #e6f0ff; }
 
+.expanded {
+  background-color: #e6f0ff;
+}

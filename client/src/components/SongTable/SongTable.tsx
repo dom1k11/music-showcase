@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
 import SongRow from "../SongRow/SongRow";
 import { generate } from "../../services/songDataGenerator";
+import { generateLikes } from "../../services/generateLikes";
 import "./SongTable.css";
+import type { Song } from "../../types/song";
 
-type Song = {
-  id: number;
-  title: string;
-  artist: string;
-  album: string;
-  genre: string;
-  details: string;
-  coverUrl: string;
-};
-
-const SongTable = ({ seed }) => {
+const SongTable = ({ seed, avgLikes }: { seed: number; avgLikes: number }) => {
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,15 +13,22 @@ const SongTable = ({ seed }) => {
   useEffect(() => {
     setLoading(true);
     generate(seed, 10)
-      .then((data: Song[]) => {
-        setSongs(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      .then((data) => setSongs(data))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
   }, [seed]);
+
+  useEffect(() => {
+  setSongs((prev) =>
+    prev.map((song) => {
+      const newLikes = generateLikes(avgLikes, song.id);
+      if (song.likes === newLikes) return song;
+      return { ...song, likes: newLikes };
+    })
+  );
+}, [avgLikes, seed]);
+
+
 
   if (loading) return <p>Loading songs...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;

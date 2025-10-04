@@ -6,13 +6,16 @@ import { fetchSong } from "../../services/fetchSong";
 import { songToWavUrl } from "../../services/songToWav";
 import { getCachedAudio, setCachedAudio } from "../../services/audioCache";
 import { getSongSeed } from "../../services/getSongSeed";
+import type { Song } from "../../types/song";
 
 export default function SongDetails({
   song,
   seed,
+  likes,
 }: {
-  song: any;
+  song: Song;
   seed: number;
+  likes: number;
 }) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -47,6 +50,7 @@ export default function SongDetails({
           coverUrl={song.coverUrl}
           size={175}
         />
+        <p className="song-likes">❤️ Likes: {likes}</p>
       </div>
 
       <div className="song-details-right">

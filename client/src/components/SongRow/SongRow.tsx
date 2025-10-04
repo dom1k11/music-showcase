@@ -1,15 +1,9 @@
 import { useState } from "react";
 import SongDetails from "../SongDetails/SongDetails";
 
-type Song = {
-  id: number;
-  title: string;
-  artist: string;
-  album: string;
-  genre: string;
-  details: string;
-  coverUrl: string;
-};
+import type { Song } from "../../types/song";
+
+
 
 const SongRow = ({ song, seed }: { song: Song; seed: number }) => {
   const [expanded, setExpanded] = useState(false);
@@ -33,7 +27,7 @@ const SongRow = ({ song, seed }: { song: Song; seed: number }) => {
         <tr className="song-row-expanded">
           <td colSpan={5}>
             <div className="song-row-details">
-              <SongDetails song={song} seed={seed} />
+              <SongDetails song={song} seed={seed} likes={song.likes} />
             </div>
           </td>
         </tr>
