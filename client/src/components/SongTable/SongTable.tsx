@@ -15,14 +15,15 @@ const SongTable = ({ seed, avgLikes, lang }: SongTableProps) => {
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
-    generate(seed, 10, lang)
+    generate(seed, 5, lang, page)
       .then((data) => setSongs(data))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, [seed, lang]);
+  }, [seed, lang, page]);
 
   useEffect(() => {
     setSongs((prev) =>
@@ -55,6 +56,15 @@ const SongTable = ({ seed, avgLikes, lang }: SongTableProps) => {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination */}
+      <div className="pagination">
+        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+          ← Prev
+        </button>
+        <span>Page {page}</span>
+        <button onClick={() => setPage(page + 1)}>Next →</button>
+      </div>
     </div>
   );
 };
