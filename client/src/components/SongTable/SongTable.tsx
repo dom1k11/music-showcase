@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import SongRow from "../SongRow/SongRow";
-import { generate } from "../../services/songDataGenerator";
-import { generateLikes } from "../../services/generateLikes";
+import { useSongs } from "../../hooks/useSongs";
 import "./SongTable.css";
-import type { Song } from "../../types/song";
 
 type SongTableProps = {
   seed: number;
@@ -12,31 +10,12 @@ type SongTableProps = {
 };
 
 const SongTable = ({ seed, avgLikes, lang }: SongTableProps) => {
-  const [songs, setSongs] = useState<Song[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
+  const { songs, loading, error } = useSongs(seed, avgLikes, lang, page);
+
   useEffect(() => {
     setPage(1);
   }, [seed, lang]);
-
-  useEffect(() => {
-    setLoading(true);
-    generate(seed, 5, lang, page)
-      .then((data) => setSongs(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [seed, lang, page]);
-
-  useEffect(() => {
-    setSongs((prev) =>
-      prev.map((song) => {
-        const newLikes = generateLikes(avgLikes, song.id);
-        if (song.likes === newLikes) return song;
-        return { ...song, likes: newLikes };
-      })
-    );
-  }, [avgLikes, seed]);
 
   if (loading) return <p>Loading songs...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -60,7 +39,6 @@ const SongTable = ({ seed, avgLikes, lang }: SongTableProps) => {
         </tbody>
       </table>
 
-      {/* Pagination */}
       <div className="pagination">
         <button disabled={page === 1} onClick={() => setPage(page - 1)}>
           ← Prev
