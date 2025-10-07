@@ -30,5 +30,5 @@ export function useInfiniteSongs(seed: number, avgLikes: number, lang: string) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return { allSongs, loading, error };
+  return { allSongs, loading, error, setPage };
 }
