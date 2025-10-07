@@ -2,7 +2,6 @@ import { Faker } from "@faker-js/faker";
 import { LOCALES } from "../constants/locales";
 import type { Song } from "../types/song";
 
-
 export function generateSongs(
   seed: number,
   count: number,
@@ -19,7 +18,9 @@ export function generateSongs(
     id: i + 1 + (page - 1) * count,
     title: faker.commerce.productName(),
     artist: faker.person.fullName(),
-    album: Math.random() > 0.3 ? faker.commerce.product() : "Single",
+    album:
+      faker.helpers.maybe(() => faker.commerce.product(), { probability: 0.7 }) ??
+      "Single",
     genre: faker.commerce.department(),
     details: faker.commerce.productDescription(),
     coverUrl: `https://picsum.photos/seed/${finalSeed}-${lang}-${i}/300/300`,
