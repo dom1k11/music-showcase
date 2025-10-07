@@ -6,32 +6,16 @@ export async function generate(
   lang: string,
   page: number
 ) {
-  const url = `${API_URL}/generate`;
-  console.log("→ POST", url, { seed, count, lang, page });
-
-  const res = await fetch(url, {
+  const res = await fetch(`${API_URL}/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ seed, count, lang, page }),
   });
 
-  console.log("Response status:", res.status);
-  const text = await res.text();
-  console.log("Raw response:", text);
-
   if (!res.ok) {
-    let errorMessage = "failed generating data";
-    try {
-      const errorData = JSON.parse(text);
-      errorMessage = errorData.error || errorMessage;
-    } catch {}
-    throw new Error(errorMessage);
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || "failed generating data");
   }
 
-  try {
-    return JSON.parse(text);
-  } catch (err) {
-    console.error("❌ Invalid JSON from server:", text);
-    throw new Error("Invalid JSON received from server");
-  }
+  return res.json();
 }
